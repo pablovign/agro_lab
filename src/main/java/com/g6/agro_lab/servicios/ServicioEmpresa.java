@@ -16,4 +16,8 @@ public class ServicioEmpresa {
     public ServicioEmpresa(RepositorioEmpresa repositorioEmpresa){
         this.repositorioEmpresa = repositorioEmpresa;
     }
+
+    public boolean esCuitDisponible(String cuit){
+        return !repositorioEmpresa.existsByCuit(cuit);
+    }
 }
