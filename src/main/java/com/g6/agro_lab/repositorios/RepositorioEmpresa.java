@@ -8,4 +8,6 @@ import org.springframework.stereotype.Repository;
 public interface RepositorioEmpresa extends JpaRepository<Empresa, Long> {
 
     boolean existsByCuit(String cuit);
+
+    boolean existsByRazonSocial(String razonSocial);
 }

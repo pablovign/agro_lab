@@ -20,4 +20,8 @@ public class ServicioEmpresa {
     public boolean esCuitDisponible(String cuit){
         return !repositorioEmpresa.existsByCuit(cuit);
     }
+
+    public boolean esRazonSocialDisponible(String razonSocial){
+        return !repositorioEmpresa.existsByRazonSocial(razonSocial);
+    }
 }

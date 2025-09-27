@@ -28,4 +28,14 @@ public class ControladorEmpresa {
 
         return ResponseEntity.ok(respuesta);
     }
+
+    @GetMapping("/validar-razon_social")
+    public ResponseEntity<Map<String, Object>> validarRazonSocial(@RequestParam String razonSocial){
+        boolean disponible = servicioEmpresa.esRazonSocialDisponible(razonSocial);
+        Map<String, Object> respuesta = new HashMap<>();
+        respuesta.put("razonSocial", razonSocial);
+        respuesta.put("disponible", disponible);
+
+        return ResponseEntity.ok(respuesta);
+    }
 }
