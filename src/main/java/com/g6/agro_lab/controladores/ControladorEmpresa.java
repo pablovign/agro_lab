@@ -18,4 +18,14 @@ public class ControladorEmpresa {
     public ControladorEmpresa(ServicioEmpresa servicioEmpresa){
         this.servicioEmpresa = servicioEmpresa;
     }
+
+    @GetMapping("/validar-cuit")
+    public ResponseEntity<Map<String, Object>> validarCuit(@RequestParam String cuit){
+        boolean disponible = servicioEmpresa.esCuitDisponible(cuit);
+        Map<String, Object> respuesta = new HashMap<>();
+        respuesta.put("cuit", cuit);
+        respuesta.put("disponible", disponible);
+
+        return ResponseEntity.ok(respuesta);
+    }
 }
