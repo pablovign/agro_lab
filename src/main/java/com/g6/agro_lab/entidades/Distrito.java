@@ -1,6 +1,7 @@
 package com.g6.agro_lab.entidades;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 @Entity
@@ -11,12 +12,13 @@ public class Distrito {
     @Column(name = "id_distrito")
     private Long idDistrito;
 
-    @NotNull
-    @Column(name = "nombre_distrito")
+    @NotBlank
+    @Column(name = "nombre_distrito", nullable = false)
     private String nombreDistrito;
 
+    @NotNull
     @ManyToOne
-    @JoinColumn(name = "id_departamento")
+    @JoinColumn(name = "id_departamento", nullable = false)
     private Departamento departamento;
 
     public Long getIdDistrito() {

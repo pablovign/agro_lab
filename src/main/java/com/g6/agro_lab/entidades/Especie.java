@@ -4,6 +4,9 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
 @Table(name = "especies")
 public class Especie {
@@ -15,6 +18,9 @@ public class Especie {
     @NotBlank
     @Column(name = "nombre_especie", nullable = false, unique = true)
     private String nombreEspecie;
+
+    @ManyToMany(mappedBy = "especies")
+    private Set<Establecimiento> establecimientos = new HashSet<>();
 
     public Long getIdEspecie() {
         return idEspecie;
@@ -30,5 +36,13 @@ public class Especie {
 
     public void setNombreEspecie(String nombreEspecie) {
         this.nombreEspecie = nombreEspecie;
+    }
+
+    public Set<Establecimiento> getEstablecimientos() {
+        return establecimientos;
+    }
+
+    public void setEstablecimientos(Set<Establecimiento> establecimientos) {
+        this.establecimientos = establecimientos;
     }
 }
