@@ -34,7 +34,7 @@ public class PersonaPuestoUnidadNegocio {
     private Empresa empresa;
 
     @ManyToOne
-    @JoinColumn(name = "establecimiento", nullable = true)
+    @JoinColumn(name = "id_establecimiento", nullable = true)
     private Establecimiento establecimiento;
 
     public Long getIdPersonaPuestoUnidadNegocio() {

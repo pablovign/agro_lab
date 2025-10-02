@@ -1,0 +1,44 @@
+package com.g6.agro_lab.servicios;
+
+import com.g6.agro_lab.config.SecurityConfig;
+import com.g6.agro_lab.dto.DTOPersonaRegistro;
+import com.g6.agro_lab.entidades.Persona;
+import com.g6.agro_lab.repositorios.RepositorioPersona;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+
+@Service
+public class ServicioPersona {
+    private final RepositorioPersona repositorioPersona;
+    private final PasswordEncoder passwordEncoder;
+
+    @Autowired
+    public ServicioPersona(RepositorioPersona repositorioPersona, PasswordEncoder passwordEncoder){
+        this.repositorioPersona = repositorioPersona;
+        this.passwordEncoder = passwordEncoder;
+    }
+
+    public Persona obtenerPersonaPorDni(String dni){
+        return repositorioPersona.findByDni(dni);
+    }
+
+    public Persona registrarPersona(DTOPersonaRegistro dtoPersonaRegistro){
+        Persona persona = obtenerPersonaPorDni(dtoPersonaRegistro.dni());
+
+        if(persona == null){
+            persona = new Persona();
+            persona.setDni(dtoPersonaRegistro.dni());
+            persona.setNombrePersona(dtoPersonaRegistro.nombrePersona());
+            persona.setApellido(dtoPersonaRegistro.apellido());
+            persona.setTelefono(dtoPersonaRegistro.telefono());
+            persona.setEmail(dtoPersonaRegistro.email());
+            persona.setContrasenia(passwordEncoder.encode(dtoPersonaRegistro.contrasenia()));
+
+            return repositorioPersona.save(persona);
+        }
+        else{
+            return persona;
+        }
+    }
+}

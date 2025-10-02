@@ -23,7 +23,7 @@ public class Establecimiento {
 
     @NotBlank
     @Column(name = "nombre_establecimiento", nullable = false)
-    private String nombreEstaclecimiento;
+    private String nombreEstablecimiento;
 
     @Column(name = "fecha_alta", nullable = false, insertable = false, updatable = false)
     private LocalDateTime fechaAlta;
@@ -59,7 +59,7 @@ public class Establecimiento {
     @JoinColumn(name = "id_empresa")
     private Empresa empresa;
 
-    @NotNull
+    @NotEmpty
     @ManyToMany
     @JoinTable(name = "establecimientos_especies", joinColumns = @JoinColumn(name = "id_establecimiento"),
             inverseJoinColumns = @JoinColumn(name = "id_especie"))
@@ -81,12 +81,12 @@ public class Establecimiento {
         this.numeroRenspa = numeroRenspa;
     }
 
-    public String getNombreEstaclecimiento() {
-        return nombreEstaclecimiento;
+    public String getNombreEstablecimiento() {
+        return nombreEstablecimiento;
     }
 
-    public void setNombreEstaclecimiento(String nombreEstaclecimiento) {
-        this.nombreEstaclecimiento = nombreEstaclecimiento;
+    public void setNombreEstablecimiento(String nombreEstablecimiento) {
+        this.nombreEstablecimiento = nombreEstablecimiento;
     }
 
     public LocalDateTime getFechaAlta() {
