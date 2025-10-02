@@ -33,9 +33,8 @@ public class Persona {
     @Email
     @Column(name = "email")
     private String email;
-
-    @NotBlank
-    @Column(name = "contrasenia", nullable = false)
+    
+    @Column(name = "contrasenia", nullable = true)
     private String contrasenia;
 
     @Column(name = "calle")
