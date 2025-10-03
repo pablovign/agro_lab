@@ -1,5 +1,6 @@
 package com.g6.agro_lab.entidades;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -20,6 +21,7 @@ public class Especie {
     private String nombreEspecie;
 
     @ManyToMany(mappedBy = "especies")
+    @JsonIgnore
     private Set<Establecimiento> establecimientos = new HashSet<>();
 
     public Long getIdEspecie() {

@@ -1,22 +1,18 @@
 package com.g6.agro_lab.servicios;
 
-import com.g6.agro_lab.config.SecurityConfig;
 import com.g6.agro_lab.dto.DTOPersonaRegistro;
 import com.g6.agro_lab.entidades.Persona;
 import com.g6.agro_lab.repositorios.RepositorioPersona;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 public class ServicioPersona {
     private final RepositorioPersona repositorioPersona;
-    private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public ServicioPersona(RepositorioPersona repositorioPersona, PasswordEncoder passwordEncoder){
+    public ServicioPersona(RepositorioPersona repositorioPersona){
         this.repositorioPersona = repositorioPersona;
-        this.passwordEncoder = passwordEncoder;
     }
 
     public Persona obtenerPersonaPorDni(String dni){
@@ -33,7 +29,7 @@ public class ServicioPersona {
             persona.setApellido(dtoPersonaRegistro.apellido());
             persona.setTelefono(dtoPersonaRegistro.telefono());
             persona.setEmail(dtoPersonaRegistro.email());
-            persona.setContrasenia(passwordEncoder.encode(dtoPersonaRegistro.contrasenia()));
+            persona.setContrasenia(dtoPersonaRegistro.contrasenia());
 
             return repositorioPersona.save(persona);
         }

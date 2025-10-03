@@ -33,7 +33,7 @@ public class Persona {
     @Email
     @Column(name = "email")
     private String email;
-    
+
     @Column(name = "contrasenia", nullable = true)
     private String contrasenia;
 
