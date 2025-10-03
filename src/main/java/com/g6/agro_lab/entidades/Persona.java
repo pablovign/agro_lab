@@ -11,40 +11,43 @@ public class Persona {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idPersona;
 
-    @NotBlank
-    @Size(min = 7, max = 8)
-    @Digits(integer = 8, fraction = 0)
+    @NotBlank(message = "El DNI es obligatorio.")
+    @Size(min = 7, max = 8, message = "El DNI debe tener 7 u 8 dígitos.")
+    @Digits(integer = 8, fraction = 0, message = "El DNI debe estar compuesto de números.")
     @Column(name = "dni", nullable = false, unique = true)
     private String dni;
 
-    @NotBlank
+    @NotBlank(message = "El nombre de la persona es obligatorio.")
     @Column(name = "nombre_persona", nullable = false)
     private String nombrePersona;
 
-    @NotBlank
+    @NotBlank(message = "El apellido es obligatorio.")
     @Column(name = "apellido", nullable = false)
     private String apellido;
 
-    @NotBlank
-    @Digits(integer = 12, fraction = 0)
+    @NotBlank(message = "El número de teléfono es obligatorio.")
+    @Digits(integer = 12, fraction = 0, message = "El número de telefono debe estar compuesto de números.")
     @Column(name = "telefono", nullable = false)
     private String telefono;
 
-    @Email
+    @Email(message = "El e-mail debe estar formado correctamente.")
     @Column(name = "email")
     private String email;
 
+    @Size(min = 6, max = 60, message = "La contraseña debe tener menos de 60 caracteres.")
     @Column(name = "contrasenia", nullable = true)
     private String contrasenia;
 
     @Column(name = "calle")
     private String calle;
 
-    @Digits(integer = 5, fraction = 0)
+    @Size(max = 5, message = "La numeración debe tener menos de 6 dígitos")
+    @Digits(integer = 5, fraction = 0, message = "La numeración debe estar compuesta de números.")
     @Column(name = "numeracion")
     private String numeracion;
 
-    @Digits(integer = 5, fraction = 0)
+    @Size(max = 4, message = "El código postal debe tener menos de 5 dígitos.")
+    @Digits(integer = 5, fraction = 0, message = "El código postal debe estar compuesto de números.")
     @Column(name = "codigo_postal")
     private String codigoPostal;
 

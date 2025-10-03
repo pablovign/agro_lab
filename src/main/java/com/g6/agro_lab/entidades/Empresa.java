@@ -15,14 +15,14 @@ public class Empresa {
     @Column(name = "id_empresa")
     private Long idEmpresa;
 
-    @NotBlank
-    @Size(min = 11, max = 11)
-    @Digits(integer = 11, fraction = 0)
+    @NotBlank(message = "El CUIT es obligatorio.")
+    @Size(min = 11, max = 11, message = "El CUIT debe tener 11 dígitos.")
+    @Digits(integer = 11, fraction = 0, message = "El CUIT debe estar compuesto de números.")
     @Column(name = "cuit", nullable = false, unique = true)
     private String cuit;
 
-    @NotBlank
-    @Column(name = "razon_social", nullable = false, unique = true)
+    @NotBlank(message = "La razón social es obligatoria.")
+    @Column(name = "razon_social", nullable = false)
     private String razonSocial;
 
     @Column(name = "fecha_alta", nullable = false, insertable = false, updatable = false)

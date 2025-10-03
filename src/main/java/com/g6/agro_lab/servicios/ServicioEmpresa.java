@@ -27,11 +27,7 @@ public class ServicioEmpresa {
 
     public Empresa registrarEmpresa(DTOEmpresaRegistro dtoEmpresaRegistro){
         if(!esCuitDisponible(dtoEmpresaRegistro.cuit())){
-            throw new ReglasNegocioException("El CUIT ya está registrado.");
-        }
-
-        if(!esRazonSocialDisponible(dtoEmpresaRegistro.razonSocial())){
-            throw new ReglasNegocioException("La razón social ya está registrada.");
+            throw new ReglasNegocioException("Ya existe una empresa registrada con ese CUIT.");
         }
 
         Empresa empresa = new Empresa();

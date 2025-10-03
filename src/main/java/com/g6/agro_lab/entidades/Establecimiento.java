@@ -15,13 +15,13 @@ public class Establecimiento {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idEstablecimiento;
 
-    @NotBlank
-    @Size(min = 11, max = 11)
-    @Digits(integer = 11, fraction = 0)
+    @NotBlank(message = "El número de RENSPA es obligatorio.")
+    @Size(min = 11, max = 11, message = "El número de RENSPA debe tener 11 dígitos.")
+    @Digits(integer = 11, fraction = 0, message = "El número de RENSPA debe estar compuesto de números.")
     @Column(name = "numero_renspa", nullable = false, unique = true)
     private String numeroRenspa;
 
-    @NotBlank
+    @NotBlank(message = "El nombre del establecimiento es obligatorio.")
     @Column(name = "nombre_establecimiento", nullable = false)
     private String nombreEstablecimiento;
 
@@ -31,21 +31,23 @@ public class Establecimiento {
     @Column(name = "fecha_baja", nullable = true)
     private LocalDateTime fechaBaja;
 
-    @NotBlank
+    @NotBlank(message = "La calle es obligatoria.")
     @Column(name = "calle")
     private String calle;
 
-    @NotBlank
-    @Digits(integer = 5, fraction = 0)
+    @NotBlank(message = "La numeración es obligatoria.")
+    @Size(max = 5, message = "La numeración debe tener menos de 6 dígitos")
+    @Digits(integer = 5, fraction = 0, message = "La numeración debe estar compuesta de números.")
     @Column(name = "numeracion")
     private String numeracion;
 
-    @NotBlank
-    @Digits(integer = 5, fraction = 0)
+    @NotBlank(message = "El código postal es obligatorio.")
+    @Size(max = 4, message = "El código postal debe tener menos de 5 dígitos.")
+    @Digits(integer = 5, fraction = 0, message = "El código postal debe estar compuesto de números.")
     @Column(name = "codigo_postal")
     private String codigoPostal;
 
-    @NotNull
+    @NotNull(message = "La localización geográfica es obligatoria.")
     @Column(columnDefinition = "geometry(point, 4326)")
     private Point localizacion;
 

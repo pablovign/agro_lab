@@ -1,7 +1,7 @@
 package com.g6.agro_lab.servicios;
 
 import com.g6.agro_lab.dto.DTOEstablecimientoRegistro;
-import com.g6.agro_lab.dto.PointDTO;
+import com.g6.agro_lab.dto.DTOPoint;
 import com.g6.agro_lab.entidades.Distrito;
 import com.g6.agro_lab.entidades.Empresa;
 import com.g6.agro_lab.entidades.Especie;
@@ -38,7 +38,7 @@ public class ServicioEstablecimiento {
 
     public Establecimiento registrarEstablecimiento(DTOEstablecimientoRegistro dtoEstablecimientoRegistro, Empresa empresa){
         if(!esRenspaDisponible(dtoEstablecimientoRegistro.numeroRenspa())){
-            throw new ReglasNegocioException("El número de RENSPA ya está registrado.");
+            throw new ReglasNegocioException("Ya existe un establecimiento registrado con ese número de RENSPA.");
         }
 
         Distrito distrito = repositorioDistrito.findById(dtoEstablecimientoRegistro.idDistrito())
@@ -46,7 +46,7 @@ public class ServicioEstablecimiento {
 
         List<Especie> especies = repositorioEspecie.findAllById(dtoEstablecimientoRegistro.idEspecies());
         if (especies.isEmpty()) {
-            throw new ReglasNegocioException("Debe seleccionar al menos una especie válida.");
+            throw new ReglasNegocioException("Debe seleccionar al menos una especie.");
         }
 
         Establecimiento establecimiento = new Establecimiento();
@@ -63,7 +63,7 @@ public class ServicioEstablecimiento {
         return repositorioEstablecimiento.save(establecimiento);
     }
 
-    private Point convertirPointDTO(PointDTO dto) {
+    private Point convertirPointDTO(DTOPoint dto) {
         GeometryFactory geometryFactory = new GeometryFactory();
         return geometryFactory.createPoint(new Coordinate(dto.longitud(), dto.latitud()));
     }

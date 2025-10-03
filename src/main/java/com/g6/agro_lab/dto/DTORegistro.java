@@ -16,5 +16,6 @@ public record DTORegistro(
         @Valid
         DTOPersonaRegistro dtoPersonaEmpresaRegistro,
 
+        @Valid
         DTOPersonaRegistro dtoPersonaEstablecimientoRegistro
 ) { }
