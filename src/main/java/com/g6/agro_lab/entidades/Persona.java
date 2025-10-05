@@ -4,6 +4,9 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import org.locationtech.jts.geom.Point;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "personas")
 public class Persona {
@@ -57,6 +60,9 @@ public class Persona {
     @ManyToOne
     @JoinColumn(name = "id_distrito")
     private Distrito distrito;
+
+    @OneToMany(mappedBy = "persona", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<PersonaPuestoUnidadNegocio> personasPuestosUnidadesNegocio = new ArrayList<>();
 
     public Long getIdPersona() {
         return idPersona;
@@ -152,5 +158,13 @@ public class Persona {
 
     public void setDistrito(Distrito distrito) {
         this.distrito = distrito;
+    }
+
+    public List<PersonaPuestoUnidadNegocio> getPersonasPuestosUnidadesNegocio() {
+        return personasPuestosUnidadesNegocio;
+    }
+
+    public void setPersonasPuestosUnidadesNegocio(List<PersonaPuestoUnidadNegocio> personasPuestosUnidadesNegocio) {
+        this.personasPuestosUnidadesNegocio = personasPuestosUnidadesNegocio;
     }
 }
