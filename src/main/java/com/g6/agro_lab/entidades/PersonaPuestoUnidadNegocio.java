@@ -1,5 +1,6 @@
 package com.g6.agro_lab.entidades;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 
@@ -22,6 +23,7 @@ public class PersonaPuestoUnidadNegocio {
     @NotNull
     @ManyToOne
     @JoinColumn(name = "id_persona", nullable = false)
+    @JsonIgnore
     private Persona persona;
 
     @NotNull
