@@ -18,7 +18,6 @@ public record DTOEstablecimientoRegistro(
         @NotBlank(message = "La numeración es obligatoria.")
         @Size(max = 5, message = "La numeración debe tener menos de 6 dígitos")
         @Digits(integer = 5, fraction = 0, message = "La numeración debe estar compuesta de números.")
-        @Digits(integer = 5, fraction = 0)
         String numeracion,
 
         @NotBlank(message = "El código postal es obligatorio.")

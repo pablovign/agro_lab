@@ -19,7 +19,7 @@ public record DTOPersonaRegistro(
         String apellido,
 
         @NotBlank(message = "El número de teléfono es obligatorio.")
-        @Digits(integer = 12, fraction = 0, message = "El número de telefono debe estar compuesto de números.")
+        @Digits(integer = 12, fraction = 0, message = "El número de teléfono debe estar compuesto de números.")
         @Column(name = "telefono", nullable = false)
         String telefono,
 
