@@ -32,8 +32,8 @@ public class ServicioEstablecimiento {
         this.repositorioEspecie = repositorioEspecie;
     }
 
-    public boolean esRenspaDisponible(String renspa){
-        return !repositorioEstablecimiento.existsByNumeroRenspa(renspa);
+    public boolean esRenspaDisponible(String numeroRenspa){
+        return !repositorioEstablecimiento.existsByNumeroRenspa(numeroRenspa);
     }
 
     public Establecimiento registrarEstablecimiento(DTOEstablecimientoRegistro dtoEstablecimientoRegistro, Empresa empresa){
