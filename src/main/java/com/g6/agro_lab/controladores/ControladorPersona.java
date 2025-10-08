@@ -1,5 +1,6 @@
 package com.g6.agro_lab.controladores;
 
+import com.g6.agro_lab.dto.DTOPersonaRegistrada;
 import com.g6.agro_lab.entidades.Persona;
 import com.g6.agro_lab.servicios.ServicioPersona;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +19,8 @@ public class ControladorPersona {
         this.servicioPersona = servicioPersona;
     }
 
-    @GetMapping("/persona/{dni}")
-    public Persona obtenerPersonaPorDni(@PathVariable String dni){
-        return servicioPersona.obtenerPersonaPorDni(dni);
+    @GetMapping("/persona-registrada/{dni}")
+    public DTOPersonaRegistrada obtenerPersonaRegistradaPorDni(@PathVariable String dni){
+        return servicioPersona.obtenerPersonaRegistradaPorDni(dni);
     }
 }

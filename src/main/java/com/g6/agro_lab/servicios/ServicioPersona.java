@@ -1,7 +1,9 @@
 package com.g6.agro_lab.servicios;
 
 import com.g6.agro_lab.dto.DTOPersonaRegistro;
+import com.g6.agro_lab.dto.DTOPersonaRegistrada;
 import com.g6.agro_lab.entidades.Persona;
+import com.g6.agro_lab.excepciones.RecursoNoEncontradoException;
 import com.g6.agro_lab.repositorios.RepositorioPersona;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -18,7 +20,7 @@ public class ServicioPersona {
         this.passwordEncoder = passwordEncoder;
     }
 
-    public Persona obtenerPersonaPorDni(String dni){
+    private Persona obtenerPersonaPorDni(String dni){
         return repositorioPersona.findByDni(dni);
     }
 
@@ -39,5 +41,20 @@ public class ServicioPersona {
         else{
             return persona;
         }
+    }
+
+    public DTOPersonaRegistrada obtenerPersonaRegistradaPorDni(String dni){
+        Persona persona = obtenerPersonaPorDni(dni);
+
+        if(persona == null){
+            throw new RecursoNoEncontradoException("No se encontró una persona con DNI: " + dni);
+        }
+
+        return new DTOPersonaRegistrada(
+                persona.getNombrePersona(),
+                persona.getApellido(),
+                persona.getTelefono(),
+                persona.getEmail()
+        );
     }
 }

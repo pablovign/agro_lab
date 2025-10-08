@@ -64,7 +64,12 @@ public class ServicioEstablecimiento {
     }
 
     private Point convertirPointDTO(DTOPoint dto) {
+        if (dto == null || dto.latitud() == null || dto.longitud() == null) {
+            throw new ReglasNegocioException("La localización geográfica debe tener valores válidos para latitud y longitud.");
+        }
+
         GeometryFactory geometryFactory = new GeometryFactory();
+
         return geometryFactory.createPoint(new Coordinate(dto.longitud(), dto.latitud()));
     }
 }

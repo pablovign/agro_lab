@@ -1,5 +1,6 @@
 package com.g6.agro_lab.excepciones;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -25,5 +26,10 @@ public class ManejadorGlobalExcepciones {
     @ExceptionHandler(ReglasNegocioException.class)
     public ResponseEntity<?> handleReglaNegocio(ReglasNegocioException ex) {
         return ResponseEntity.badRequest().body(Map.of("error", ex.getMessage()));
+    }
+
+    @ExceptionHandler(RecursoNoEncontradoException.class)
+    public ResponseEntity<?> handleRecursoNoEncontrado(RecursoNoEncontradoException ex) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("error", ex.getMessage()));
     }
 }

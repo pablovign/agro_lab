@@ -21,10 +21,6 @@ public class ServicioEmpresa {
         return !repositorioEmpresa.existsByCuit(cuit);
     }
 
-    public boolean esRazonSocialDisponible(String razonSocial){
-        return !repositorioEmpresa.existsByRazonSocial(razonSocial);
-    }
-
     public Empresa registrarEmpresa(DTOEmpresaRegistro dtoEmpresaRegistro){
         if(!esCuitDisponible(dtoEmpresaRegistro.cuit())){
             throw new ReglasNegocioException("Ya existe una empresa registrada con ese CUIT.");

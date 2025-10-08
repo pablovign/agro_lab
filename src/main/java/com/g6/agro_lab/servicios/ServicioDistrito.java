@@ -2,13 +2,12 @@ package com.g6.agro_lab.servicios;
 
 import com.g6.agro_lab.entidades.Departamento;
 import com.g6.agro_lab.entidades.Distrito;
+import com.g6.agro_lab.excepciones.RecursoNoEncontradoException;
 import com.g6.agro_lab.repositorios.RepositorioDepartamento;
 import com.g6.agro_lab.repositorios.RepositorioDistrito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ServicioDistrito {
@@ -23,7 +22,7 @@ public class ServicioDistrito {
 
     public List<Distrito> obtenerDistritosPorDepartamento(Long idDepartamento){
         Departamento departamento = repositorioDepartamento.findById(idDepartamento)
-                .orElseThrow(() -> new RuntimeException("Departamento no encontrado con ID: " + idDepartamento));
+                .orElseThrow(() -> new RecursoNoEncontradoException("Departamento no encontrado con ID: " + idDepartamento));
 
         return repositorioDistrito.findByDepartamentoOrderByNombreDistritoAsc(departamento);
     }
