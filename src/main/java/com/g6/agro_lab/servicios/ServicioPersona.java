@@ -25,6 +25,10 @@ public class ServicioPersona {
     }
 
     public Persona registrarPersona(DTOPersonaRegistro dtoPersonaRegistro){
+        if(dtoPersonaRegistro == null){
+            return null;
+        }
+        
         Persona persona = obtenerPersonaPorDni(dtoPersonaRegistro.dni());
 
         if(persona == null){
