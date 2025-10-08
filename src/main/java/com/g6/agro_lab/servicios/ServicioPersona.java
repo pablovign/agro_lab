@@ -28,7 +28,7 @@ public class ServicioPersona {
         if(dtoPersonaRegistro == null){
             return null;
         }
-        
+
         Persona persona = obtenerPersonaPorDni(dtoPersonaRegistro.dni());
 
         if(persona == null){

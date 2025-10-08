@@ -50,10 +50,12 @@ public class ServicioRegistro {
 
         if(dtoRegistro.dtoPersonaEstablecimientoRegistro() != null){
             Persona personaEstablecimiento = servicioPersona.registrarPersona(dtoRegistro.dtoPersonaEstablecimientoRegistro());
-            Puesto puestoEstablecimiento = servicioPuesto.obtenerPuestoPorNombrePuesto("ADMINISTRADOR ESTABLECIMIENTO");
 
-            servicioPersonaPuestoUnidadNegocio.registrarPersonaPuestoUnidadNegocio(personaEstablecimiento, puestoEstablecimiento,
-                    null, establecimiento);
+            if(personaEstablecimiento != null){
+                Puesto puestoEstablecimiento = servicioPuesto.obtenerPuestoPorNombrePuesto("ADMINISTRADOR ESTABLECIMIENTO");
+                servicioPersonaPuestoUnidadNegocio.registrarPersonaPuestoUnidadNegocio(personaEstablecimiento, puestoEstablecimiento,
+                        null, establecimiento);
+            }
         }
     }
 }
