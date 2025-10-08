@@ -22,7 +22,7 @@ public class ControladorEstablecimiento {
     }
 
     @GetMapping("/validar-renspa")
-    public ResponseEntity<Map<String, Object>> validarCuit(@RequestParam String numeroRenspa){
+    public ResponseEntity<Map<String, Object>> validarRenspa(@RequestParam String numeroRenspa){
         boolean disponible = servicioEstablecimiento.esRenspaDisponible(numeroRenspa);
         Map<String, Object> respuesta = new HashMap<>();
         respuesta.put("número renspa", numeroRenspa);
