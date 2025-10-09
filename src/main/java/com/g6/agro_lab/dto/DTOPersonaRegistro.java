@@ -26,7 +26,7 @@ public record DTOPersonaRegistro(
         @Email(message = "El e-mail debe estar formado correctamente.")
         String email,
 
-        //@NotBlank(message = "La contraseña es obligatoria.")
-        //@Size(min = 6, max = 6, message = "La contraseña debe tener 6 caracteres.")
+        @NotBlank(message = "La contraseña es obligatoria.")
+        @Size(min = 6, max = 6, message = "La contraseña debe tener 6 caracteres.")
         String contrasenia
 ){}
