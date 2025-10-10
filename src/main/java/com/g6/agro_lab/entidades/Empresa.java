@@ -6,6 +6,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "empresas")
@@ -30,6 +31,9 @@ public class Empresa {
 
     @Column(name = "fecha_baja", nullable = true)
     private LocalDateTime fechaBaja;
+
+    @OneToMany(mappedBy = "empresa")
+    private List<Establecimiento> establecimientos;
 
     public Long getIdEmpresa() {
         return idEmpresa;
@@ -69,5 +73,13 @@ public class Empresa {
 
     public void setFechaBaja(LocalDateTime fechaBaja) {
         this.fechaBaja = fechaBaja;
+    }
+
+    public List<Establecimiento> getEstablecimientos() {
+        return establecimientos;
+    }
+
+    public void setEstablecimientos(List<Establecimiento> establecimientos) {
+        this.establecimientos = establecimientos;
     }
 }

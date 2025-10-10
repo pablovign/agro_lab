@@ -3,8 +3,11 @@ package com.g6.agro_lab.controladores;
 import com.g6.agro_lab.config.seguridad.JwtUtil;
 import com.g6.agro_lab.dto.DTOAutRespuesta;
 import com.g6.agro_lab.dto.DTOAutSolicitud;
+import com.g6.agro_lab.entidades.Persona;
 import com.g6.agro_lab.servicios.ServicioDetalleUsuarioPersonalizado;
+import com.g6.agro_lab.servicios.ServicioPersona;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.graphql.GraphQlProperties;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -23,26 +26,44 @@ public class ControladorAut {
     private final AuthenticationManager authenticationManager;
     private final ServicioDetalleUsuarioPersonalizado servicioDetalleUsuarioPersonalizado;
     private final JwtUtil jwtUtil;
+    private final ServicioPersona servicioPersona;
 
     @Autowired
     public ControladorAut(AuthenticationManager authenticationManager, ServicioDetalleUsuarioPersonalizado servicioDetalleUsuarioPersonalizado,
-                          JwtUtil jwtUtil){
+                          JwtUtil jwtUtil, ServicioPersona servicioPersona){
         this.authenticationManager = authenticationManager;
         this.servicioDetalleUsuarioPersonalizado = servicioDetalleUsuarioPersonalizado;
         this.jwtUtil = jwtUtil;
+        this.servicioPersona = servicioPersona;
     }
-
+    //Anterior
+//    @PostMapping("/login")
+//    public ResponseEntity<DTOAutRespuesta> login(@RequestBody DTOAutSolicitud solicitud) {
+//        try {
+//            Authentication authentication = authenticationManager.authenticate(
+//                    new UsernamePasswordAuthenticationToken(solicitud.dni(), solicitud.contrasenia()));
+//
+//            UserDetails userDetails = servicioDetalleUsuarioPersonalizado.loadUserByUsername(solicitud.dni());
+//            String token = jwtUtil.generarToken(userDetails);
+//
+//            return ResponseEntity.ok(new DTOAutRespuesta(token));
+//        } catch (AuthenticationException e) {
+//            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+//        }
+//    }
+    //Actual
     @PostMapping("/login")
-    public ResponseEntity<DTOAutRespuesta> login(@RequestBody DTOAutSolicitud solicitud) {
-        try {
-            Authentication authentication = authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(solicitud.dni(), solicitud.contrasenia()));
-
+    public ResponseEntity<DTOAutRespuesta> login(@RequestBody DTOAutSolicitud solicitud){
+        try{
+            Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(solicitud.dni(),
+                    solicitud.contrasenia()));
             UserDetails userDetails = servicioDetalleUsuarioPersonalizado.loadUserByUsername(solicitud.dni());
-            String token = jwtUtil.generarToken(userDetails);
+            Persona persona = servicioPersona.obtenerPersonaPorDni(solicitud.dni());
+            String token = jwtUtil.generarToken(userDetails, persona);
 
             return ResponseEntity.ok(new DTOAutRespuesta(token));
-        } catch (AuthenticationException e) {
+        }
+        catch (AuthenticationException e){
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
     }

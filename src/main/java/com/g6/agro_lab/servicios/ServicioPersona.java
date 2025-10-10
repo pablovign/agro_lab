@@ -20,7 +20,7 @@ public class ServicioPersona {
         this.passwordEncoder = passwordEncoder;
     }
 
-    private Persona obtenerPersonaPorDni(String dni){
+    public Persona obtenerPersonaPorDni(String dni){
         return repositorioPersona.findByDni(dni);
     }
 

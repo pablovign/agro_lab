@@ -5,6 +5,8 @@ import com.g6.agro_lab.repositorios.RepositorioPersonaPuestoUnidadNegocio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ServicioPersonaPuestoUnidadNegocio {
     private final RepositorioPersonaPuestoUnidadNegocio repositorioPersonaPuestoUnidadNegocio;
@@ -33,5 +35,9 @@ public class ServicioPersonaPuestoUnidadNegocio {
         }
 
         return repositorioPersonaPuestoUnidadNegocio.save(personaPuestoUnidadNegocio);
+    }
+
+    public List<PersonaPuestoUnidadNegocio> obtenerPersonasPuestosUnidadesNegocioPorPersona(Long idPersona){
+        return repositorioPersonaPuestoUnidadNegocio.findByPersona_IdPersonaAndFechaBajaIsNull(idPersona);
     }
 }
